@@ -59,6 +59,11 @@ int main (int argc, char ** argv)
   if (display_caption("Gaussian Blur") != 0) { return 0; }
   for (int i = 1; i < MAX_KERNEL_LENGTH; i = i+2)
   {
+    // src: source image
+    // dst: destination image
+    // kernel: (kernel.width, kernel.height) the size of the kernel to be used
+    // sigma x: the standard deviation in x
+    // sigma y: the standard deviation in y
     GaussianBlur(src, dst, cv::Size(i, i), 0, 0);
     if (display_dst(DELAY_BLUR) != 0) { return 0; }
   }
