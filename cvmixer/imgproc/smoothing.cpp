@@ -71,6 +71,9 @@ int main (int argc, char ** argv)
   if (display_caption("Median Blur") != 0) { return 0; }
   for (int i = 1; i < MAX_KERNEL_LENGTH; i = i+2)
   {
+    // src: source image
+    // dst: destination image
+    // i: size of the kernel
     medianBlur(src, dst, i);
     if (display_dst(DELAY_BLUR) != 0) { return 0; }
   }
@@ -78,6 +81,11 @@ int main (int argc, char ** argv)
   if (display_caption("Bilateral Blur") != 0) { return 0; }
   for (int i = 1; i < MAX_KERNEL_LENGTH; i = i+2)
   {
+    // src: source image
+    // dst: destination image
+    // d: the diameter of each pixel neighborhood
+    // sigma color: the standard deviation in the color space
+    // sigma space: the standard deviattion in the coordinate space (in pixel terms)
     bilateralFilter(src, dst, i, i*2, i/2);
     if (display_dst(DELAY_BLUR) != 0) { return 0; }
   }
