@@ -3,3 +3,6 @@
 *.swp
 *.swn
 *.swm
+
+# build
+_build
