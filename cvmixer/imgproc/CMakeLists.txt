@@ -1,4 +1,5 @@
 # ----------------------------------------------------------------------------
+# executable
 
 # smoothing
 add_executable (smoothing smoothing.cpp)
