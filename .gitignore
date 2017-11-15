@@ -6,3 +6,7 @@
 
 # build
 _build
+
+# libs
+_3rdparty
+_libs

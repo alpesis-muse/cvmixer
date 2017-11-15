@@ -10,8 +10,11 @@ project (CVMIXER)
 # cmake module
 
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
+include (OpenCVConfig)
 
-find_package (OpenCV REQUIRED)
+
+include_directories (${OpenCV_INCLUDE_DIRS})
+
 
 # ----------------------------------------------------------------------------
 # subdirectoires
