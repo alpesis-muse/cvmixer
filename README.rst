@@ -4,7 +4,8 @@ CV Mixer
 
 Prequisites
 
-- OpenCV
+- Ubuntu 14.04
+- OpenCV 2.4
 
 OpenCV Installation:
 
@@ -24,9 +25,10 @@ OpenCV Installation:
 Getting Started
 ==============================================================================
 
+How it runs
 
 ::
 
     $ mkdir _build && cd _build
-    $ cmake -DOpenCV_ROOT_DIR=<path/to/opencv> ..
+    $ cmake ..
     $ make
