@@ -16,7 +16,7 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set(_targetsDefined)
 set(_targetsNotDefined)
 set(_expectedTargets)
-foreach(_expectedTarget opencv_cudev opencv_core opencv_cudaarithm opencv_flann opencv_imgproc opencv_ml opencv_objdetect opencv_video opencv_viz opencv_cudabgsegm opencv_cudafilters opencv_cudaimgproc opencv_cudawarping opencv_dnn opencv_imgcodecs opencv_photo opencv_shape opencv_videoio opencv_cudacodec opencv_highgui opencv_features2d opencv_calib3d opencv_cudafeatures2d opencv_cudalegacy opencv_cudaobjdetect opencv_cudaoptflow opencv_cudastereo opencv_stitching opencv_superres opencv_videostab)
+foreach(_expectedTarget opencv_core opencv_flann opencv_imgproc opencv_highgui opencv_features2d opencv_calib3d opencv_ml opencv_video opencv_legacy opencv_objdetect opencv_photo opencv_gpu opencv_ocl opencv_nonfree opencv_contrib opencv_stitching opencv_superres opencv_ts opencv_videostab)
   list(APPEND _expectedTargets ${_expectedTarget})
   if(NOT TARGET ${_expectedTarget})
     list(APPEND _targetsNotDefined ${_expectedTarget})
@@ -38,422 +38,270 @@ unset(_targetsNotDefined)
 unset(_expectedTargets)
 
 
-# Create imported target opencv_cudev
-add_library(opencv_cudev SHARED IMPORTED)
-
 # Create imported target opencv_core
 add_library(opencv_core SHARED IMPORTED)
 
 set_target_properties(opencv_core PROPERTIES
-  INTERFACE_COMPILE_DEFINITIONS "OPENCV_TRAITS_ENABLE_DEPRECATED"
-  INTERFACE_LINK_LIBRARIES "opencv_cudev"
-)
-
-# Create imported target opencv_cudaarithm
-add_library(opencv_cudaarithm SHARED IMPORTED)
-
-set_target_properties(opencv_cudaarithm PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core"
+  INTERFACE_LINK_LIBRARIES "opencv_dep_cudart;opencv_dep_nppc;opencv_dep_nppi;opencv_dep_npps;opencv_dep_cudart;opencv_dep_nppc;opencv_dep_nppi;opencv_dep_npps"
 )
 
 # Create imported target opencv_flann
 add_library(opencv_flann SHARED IMPORTED)
 
 set_target_properties(opencv_flann PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core"
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_core"
 )
 
 # Create imported target opencv_imgproc
 add_library(opencv_imgproc SHARED IMPORTED)
 
 set_target_properties(opencv_imgproc PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core"
-)
-
-# Create imported target opencv_ml
-add_library(opencv_ml SHARED IMPORTED)
-
-set_target_properties(opencv_ml PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core"
-)
-
-# Create imported target opencv_objdetect
-add_library(opencv_objdetect SHARED IMPORTED)
-
-set_target_properties(opencv_objdetect PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_imgproc"
-)
-
-# Create imported target opencv_video
-add_library(opencv_video SHARED IMPORTED)
-
-set_target_properties(opencv_video PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_imgproc"
-)
-
-# Create imported target opencv_viz
-add_library(opencv_viz SHARED IMPORTED)
-
-set_target_properties(opencv_viz PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core"
-)
-
-# Create imported target opencv_cudabgsegm
-add_library(opencv_cudabgsegm SHARED IMPORTED)
-
-set_target_properties(opencv_cudabgsegm PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_imgproc;opencv_video"
-)
-
-# Create imported target opencv_cudafilters
-add_library(opencv_cudafilters SHARED IMPORTED)
-
-set_target_properties(opencv_cudafilters PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_cudaarithm;opencv_imgproc"
-)
-
-# Create imported target opencv_cudaimgproc
-add_library(opencv_cudaimgproc SHARED IMPORTED)
-
-set_target_properties(opencv_cudaimgproc PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_cudaarithm;opencv_imgproc;opencv_cudafilters"
-)
-
-# Create imported target opencv_cudawarping
-add_library(opencv_cudawarping SHARED IMPORTED)
-
-set_target_properties(opencv_cudawarping PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_imgproc"
-)
-
-# Create imported target opencv_dnn
-add_library(opencv_dnn SHARED IMPORTED)
-
-set_target_properties(opencv_dnn PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_imgproc"
-)
-
-# Create imported target opencv_imgcodecs
-add_library(opencv_imgcodecs SHARED IMPORTED)
-
-set_target_properties(opencv_imgcodecs PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_imgproc"
-)
-
-# Create imported target opencv_photo
-add_library(opencv_photo SHARED IMPORTED)
-
-set_target_properties(opencv_photo PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_cudaarithm;opencv_imgproc;opencv_cudafilters;opencv_cudaimgproc"
-)
-
-# Create imported target opencv_shape
-add_library(opencv_shape SHARED IMPORTED)
-
-set_target_properties(opencv_shape PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_imgproc;opencv_video"
-)
-
-# Create imported target opencv_videoio
-add_library(opencv_videoio SHARED IMPORTED)
-
-set_target_properties(opencv_videoio PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_imgproc;opencv_imgcodecs"
-)
-
-# Create imported target opencv_cudacodec
-add_library(opencv_cudacodec SHARED IMPORTED)
-
-set_target_properties(opencv_cudacodec PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_imgproc;opencv_imgcodecs;opencv_videoio"
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_core"
 )
 
 # Create imported target opencv_highgui
 add_library(opencv_highgui SHARED IMPORTED)
 
 set_target_properties(opencv_highgui PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_imgproc;opencv_imgcodecs;opencv_videoio"
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_core;opencv_imgproc"
 )
 
 # Create imported target opencv_features2d
 add_library(opencv_features2d SHARED IMPORTED)
 
 set_target_properties(opencv_features2d PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_flann;opencv_imgproc;opencv_imgcodecs;opencv_videoio;opencv_highgui"
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui"
 )
 
 # Create imported target opencv_calib3d
 add_library(opencv_calib3d SHARED IMPORTED)
 
 set_target_properties(opencv_calib3d PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_flann;opencv_imgproc;opencv_imgcodecs;opencv_videoio;opencv_highgui;opencv_features2d"
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d"
 )
 
-# Create imported target opencv_cudafeatures2d
-add_library(opencv_cudafeatures2d SHARED IMPORTED)
+# Create imported target opencv_ml
+add_library(opencv_ml SHARED IMPORTED)
 
-set_target_properties(opencv_cudafeatures2d PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_cudaarithm;opencv_flann;opencv_imgproc;opencv_cudafilters;opencv_cudawarping;opencv_imgcodecs;opencv_videoio;opencv_highgui;opencv_features2d"
+set_target_properties(opencv_ml PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_core"
 )
 
-# Create imported target opencv_cudalegacy
-add_library(opencv_cudalegacy SHARED IMPORTED)
+# Create imported target opencv_video
+add_library(opencv_video SHARED IMPORTED)
 
-set_target_properties(opencv_cudalegacy PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_cudaarithm;opencv_flann;opencv_imgproc;opencv_objdetect;opencv_video;opencv_cudafilters;opencv_cudaimgproc;opencv_imgcodecs;opencv_videoio;opencv_highgui;opencv_features2d;opencv_calib3d"
+set_target_properties(opencv_video PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_core;opencv_imgproc"
 )
 
-# Create imported target opencv_cudaobjdetect
-add_library(opencv_cudaobjdetect SHARED IMPORTED)
+# Create imported target opencv_legacy
+add_library(opencv_legacy SHARED IMPORTED)
 
-set_target_properties(opencv_cudaobjdetect PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_cudaarithm;opencv_flann;opencv_imgproc;opencv_objdetect;opencv_video;opencv_cudafilters;opencv_cudaimgproc;opencv_cudawarping;opencv_imgcodecs;opencv_videoio;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_cudalegacy"
+set_target_properties(opencv_legacy PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_ml;opencv_video;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_ml;opencv_video"
 )
 
-# Create imported target opencv_cudaoptflow
-add_library(opencv_cudaoptflow SHARED IMPORTED)
+# Create imported target opencv_objdetect
+add_library(opencv_objdetect SHARED IMPORTED)
 
-set_target_properties(opencv_cudaoptflow PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_cudaarithm;opencv_flann;opencv_imgproc;opencv_objdetect;opencv_video;opencv_cudafilters;opencv_cudaimgproc;opencv_cudawarping;opencv_imgcodecs;opencv_videoio;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_cudalegacy"
+set_target_properties(opencv_objdetect PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_highgui;opencv_core;opencv_imgproc;opencv_highgui"
 )
 
-# Create imported target opencv_cudastereo
-add_library(opencv_cudastereo SHARED IMPORTED)
+# Create imported target opencv_photo
+add_library(opencv_photo SHARED IMPORTED)
 
-set_target_properties(opencv_cudastereo PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_flann;opencv_imgproc;opencv_imgcodecs;opencv_videoio;opencv_highgui;opencv_features2d;opencv_calib3d"
+set_target_properties(opencv_photo PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_core;opencv_imgproc"
+)
+
+# Create imported target opencv_gpu
+add_library(opencv_gpu SHARED IMPORTED)
+
+set_target_properties(opencv_gpu PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_dep_cudart;opencv_dep_nppc;opencv_dep_nppi;opencv_dep_npps;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_dep_cufft;opencv_ml;opencv_video;opencv_legacy;opencv_objdetect;opencv_photo;opencv_dep_cudart;opencv_dep_nppc;opencv_dep_nppi;opencv_dep_npps;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_dep_cufft;opencv_ml;opencv_video;opencv_legacy;opencv_objdetect;opencv_photo"
+)
+
+# Create imported target opencv_ocl
+add_library(opencv_ocl SHARED IMPORTED)
+
+set_target_properties(opencv_ocl PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_ml;opencv_objdetect;opencv_video;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_ml;opencv_objdetect;opencv_video"
+)
+
+# Create imported target opencv_nonfree
+add_library(opencv_nonfree SHARED IMPORTED)
+
+set_target_properties(opencv_nonfree PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_dep_cudart;opencv_dep_nppc;opencv_dep_nppi;opencv_dep_npps;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_dep_cufft;opencv_ml;opencv_video;opencv_legacy;opencv_objdetect;opencv_photo;opencv_gpu;opencv_ocl;opencv_dep_cudart;opencv_dep_nppc;opencv_dep_nppi;opencv_dep_npps;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_dep_cufft;opencv_ml;opencv_video;opencv_legacy;opencv_objdetect;opencv_photo;opencv_gpu;opencv_ocl"
+)
+
+# Create imported target opencv_contrib
+add_library(opencv_contrib SHARED IMPORTED)
+
+set_target_properties(opencv_contrib PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_dep_cudart;opencv_dep_nppc;opencv_dep_nppi;opencv_dep_npps;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_dep_cufft;opencv_ml;opencv_video;opencv_legacy;opencv_objdetect;opencv_photo;opencv_gpu;opencv_ocl;opencv_nonfree;opencv_dep_cudart;opencv_dep_nppc;opencv_dep_nppi;opencv_dep_npps;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_dep_cufft;opencv_ml;opencv_video;opencv_legacy;opencv_objdetect;opencv_photo;opencv_gpu;opencv_ocl;opencv_nonfree"
 )
 
 # Create imported target opencv_stitching
 add_library(opencv_stitching SHARED IMPORTED)
 
 set_target_properties(opencv_stitching PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_cudaarithm;opencv_flann;opencv_imgproc;opencv_objdetect;opencv_video;opencv_cudafilters;opencv_cudaimgproc;opencv_cudawarping;opencv_imgcodecs;opencv_videoio;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_cudafeatures2d;opencv_cudalegacy"
+  INTERFACE_LINK_LIBRARIES "opencv_dep_cudart;opencv_dep_nppc;opencv_dep_nppi;opencv_dep_npps;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_dep_cufft;opencv_ml;opencv_video;opencv_legacy;opencv_objdetect;opencv_photo;opencv_gpu;opencv_ocl;opencv_nonfree;opencv_dep_cudart;opencv_dep_nppc;opencv_dep_nppi;opencv_dep_npps;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_dep_cufft;opencv_ml;opencv_video;opencv_legacy;opencv_objdetect;opencv_photo;opencv_gpu;opencv_ocl;opencv_nonfree"
 )
 
 # Create imported target opencv_superres
 add_library(opencv_superres SHARED IMPORTED)
 
 set_target_properties(opencv_superres PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_cudaarithm;opencv_flann;opencv_imgproc;opencv_objdetect;opencv_video;opencv_cudafilters;opencv_cudaimgproc;opencv_cudawarping;opencv_imgcodecs;opencv_videoio;opencv_cudacodec;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_cudalegacy;opencv_cudaoptflow"
+  INTERFACE_LINK_LIBRARIES "opencv_dep_cudart;opencv_dep_nppc;opencv_dep_nppi;opencv_dep_npps;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_dep_cufft;opencv_ml;opencv_video;opencv_legacy;opencv_objdetect;opencv_photo;opencv_gpu;opencv_ocl;opencv_dep_cudart;opencv_dep_nppc;opencv_dep_nppi;opencv_dep_npps;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_dep_cufft;opencv_ml;opencv_video;opencv_legacy;opencv_objdetect;opencv_photo;opencv_gpu;opencv_ocl"
+)
+
+# Create imported target opencv_ts
+add_library(opencv_ts STATIC IMPORTED)
+
+set_target_properties(opencv_ts PROPERTIES
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_video;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_video;$<LINK_ONLY:dl>;$<LINK_ONLY:m>;$<LINK_ONLY:pthread>;$<LINK_ONLY:rt>;$<LINK_ONLY:dl>;$<LINK_ONLY:m>;$<LINK_ONLY:pthread>;$<LINK_ONLY:rt>;$<LINK_ONLY:opencv_dep_cudart>;$<LINK_ONLY:opencv_dep_nppc>;$<LINK_ONLY:opencv_dep_nppi>;$<LINK_ONLY:opencv_dep_npps>;$<LINK_ONLY:opencv_dep_cufft>"
 )
 
 # Create imported target opencv_videostab
 add_library(opencv_videostab SHARED IMPORTED)
 
 set_target_properties(opencv_videostab PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_cudev;opencv_core;opencv_cudaarithm;opencv_flann;opencv_imgproc;opencv_objdetect;opencv_video;opencv_cudafilters;opencv_cudaimgproc;opencv_cudawarping;opencv_imgcodecs;opencv_photo;opencv_videoio;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_cudalegacy;opencv_cudaoptflow"
+  INTERFACE_LINK_LIBRARIES "opencv_dep_cudart;opencv_dep_nppc;opencv_dep_nppi;opencv_dep_npps;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_dep_cufft;opencv_ml;opencv_video;opencv_legacy;opencv_objdetect;opencv_photo;opencv_gpu;opencv_dep_cudart;opencv_dep_nppc;opencv_dep_nppi;opencv_dep_npps;opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_dep_cufft;opencv_ml;opencv_video;opencv_legacy;opencv_objdetect;opencv_photo;opencv_gpu"
 )
 
-# Import target "opencv_cudev" for configuration "Release"
-set_property(TARGET opencv_cudev APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_cudev PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_cudev.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_cudev.so.3.3"
-  )
-
-# Import target "opencv_core" for configuration "Release"
+# Import target "opencv_core" for configuration "RELEASE"
 set_property(TARGET opencv_core APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(opencv_core PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_core.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_core.so.3.3"
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_core.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_core.so.2.4"
   )
 
-# Import target "opencv_cudaarithm" for configuration "Release"
-set_property(TARGET opencv_cudaarithm APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_cudaarithm PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_cudaarithm.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_cudaarithm.so.3.3"
-  )
-
-# Import target "opencv_flann" for configuration "Release"
+# Import target "opencv_flann" for configuration "RELEASE"
 set_property(TARGET opencv_flann APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(opencv_flann PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_flann.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_flann.so.3.3"
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_flann.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_flann.so.2.4"
   )
 
-# Import target "opencv_imgproc" for configuration "Release"
+# Import target "opencv_imgproc" for configuration "RELEASE"
 set_property(TARGET opencv_imgproc APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(opencv_imgproc PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_imgproc.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_imgproc.so.3.3"
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_imgproc.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_imgproc.so.2.4"
   )
 
-# Import target "opencv_ml" for configuration "Release"
-set_property(TARGET opencv_ml APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_ml PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_ml.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_ml.so.3.3"
-  )
-
-# Import target "opencv_objdetect" for configuration "Release"
-set_property(TARGET opencv_objdetect APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_objdetect PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_objdetect.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_objdetect.so.3.3"
-  )
-
-# Import target "opencv_video" for configuration "Release"
-set_property(TARGET opencv_video APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_video PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_video.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_video.so.3.3"
-  )
-
-# Import target "opencv_viz" for configuration "Release"
-set_property(TARGET opencv_viz APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_viz PROPERTIES
-  IMPORTED_LINK_DEPENDENT_LIBRARIES_RELEASE "vtkCommon;vtkFiltering;vtkImaging;vtkGraphics;vtkGenericFiltering;vtkIO;vtkRendering;vtkVolumeRendering;vtkHybrid;vtkWidgets;vtkParallel;vtkInfovis;vtkGeovis;vtkViews;vtkCharts"
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_viz.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_viz.so.3.3"
-  )
-
-# Import target "opencv_cudabgsegm" for configuration "Release"
-set_property(TARGET opencv_cudabgsegm APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_cudabgsegm PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_cudabgsegm.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_cudabgsegm.so.3.3"
-  )
-
-# Import target "opencv_cudafilters" for configuration "Release"
-set_property(TARGET opencv_cudafilters APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_cudafilters PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_cudafilters.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_cudafilters.so.3.3"
-  )
-
-# Import target "opencv_cudaimgproc" for configuration "Release"
-set_property(TARGET opencv_cudaimgproc APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_cudaimgproc PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_cudaimgproc.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_cudaimgproc.so.3.3"
-  )
-
-# Import target "opencv_cudawarping" for configuration "Release"
-set_property(TARGET opencv_cudawarping APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_cudawarping PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_cudawarping.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_cudawarping.so.3.3"
-  )
-
-# Import target "opencv_dnn" for configuration "Release"
-set_property(TARGET opencv_dnn APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_dnn PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_dnn.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_dnn.so.3.3"
-  )
-
-# Import target "opencv_imgcodecs" for configuration "Release"
-set_property(TARGET opencv_imgcodecs APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_imgcodecs PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_imgcodecs.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_imgcodecs.so.3.3"
-  )
-
-# Import target "opencv_photo" for configuration "Release"
-set_property(TARGET opencv_photo APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_photo PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_photo.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_photo.so.3.3"
-  )
-
-# Import target "opencv_shape" for configuration "Release"
-set_property(TARGET opencv_shape APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_shape PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_shape.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_shape.so.3.3"
-  )
-
-# Import target "opencv_videoio" for configuration "Release"
-set_property(TARGET opencv_videoio APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_videoio PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_videoio.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_videoio.so.3.3"
-  )
-
-# Import target "opencv_cudacodec" for configuration "Release"
-set_property(TARGET opencv_cudacodec APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_cudacodec PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_cudacodec.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_cudacodec.so.3.3"
-  )
-
-# Import target "opencv_highgui" for configuration "Release"
+# Import target "opencv_highgui" for configuration "RELEASE"
 set_property(TARGET opencv_highgui APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(opencv_highgui PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_highgui.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_highgui.so.3.3"
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_highgui.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_highgui.so.2.4"
   )
 
-# Import target "opencv_features2d" for configuration "Release"
+# Import target "opencv_features2d" for configuration "RELEASE"
 set_property(TARGET opencv_features2d APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(opencv_features2d PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_features2d.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_features2d.so.3.3"
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_features2d.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_features2d.so.2.4"
   )
 
-# Import target "opencv_calib3d" for configuration "Release"
+# Import target "opencv_calib3d" for configuration "RELEASE"
 set_property(TARGET opencv_calib3d APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(opencv_calib3d PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_calib3d.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_calib3d.so.3.3"
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_calib3d.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_calib3d.so.2.4"
   )
 
-# Import target "opencv_cudafeatures2d" for configuration "Release"
-set_property(TARGET opencv_cudafeatures2d APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_cudafeatures2d PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_cudafeatures2d.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_cudafeatures2d.so.3.3"
+# Import target "opencv_ml" for configuration "RELEASE"
+set_property(TARGET opencv_ml APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(opencv_ml PROPERTIES
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_ml.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_ml.so.2.4"
   )
 
-# Import target "opencv_cudalegacy" for configuration "Release"
-set_property(TARGET opencv_cudalegacy APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_cudalegacy PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_cudalegacy.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_cudalegacy.so.3.3"
+# Import target "opencv_video" for configuration "RELEASE"
+set_property(TARGET opencv_video APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(opencv_video PROPERTIES
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_video.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_video.so.2.4"
   )
 
-# Import target "opencv_cudaobjdetect" for configuration "Release"
-set_property(TARGET opencv_cudaobjdetect APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_cudaobjdetect PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_cudaobjdetect.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_cudaobjdetect.so.3.3"
+# Import target "opencv_legacy" for configuration "RELEASE"
+set_property(TARGET opencv_legacy APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(opencv_legacy PROPERTIES
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_legacy.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_legacy.so.2.4"
   )
 
-# Import target "opencv_cudaoptflow" for configuration "Release"
-set_property(TARGET opencv_cudaoptflow APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_cudaoptflow PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_cudaoptflow.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_cudaoptflow.so.3.3"
+# Import target "opencv_objdetect" for configuration "RELEASE"
+set_property(TARGET opencv_objdetect APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(opencv_objdetect PROPERTIES
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_objdetect.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_objdetect.so.2.4"
   )
 
-# Import target "opencv_cudastereo" for configuration "Release"
-set_property(TARGET opencv_cudastereo APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(opencv_cudastereo PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_cudastereo.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_cudastereo.so.3.3"
+# Import target "opencv_photo" for configuration "RELEASE"
+set_property(TARGET opencv_photo APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(opencv_photo PROPERTIES
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_photo.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_photo.so.2.4"
   )
 
-# Import target "opencv_stitching" for configuration "Release"
+# Import target "opencv_gpu" for configuration "RELEASE"
+set_property(TARGET opencv_gpu APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(opencv_gpu PROPERTIES
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_gpu.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_gpu.so.2.4"
+  )
+
+# Import target "opencv_ocl" for configuration "RELEASE"
+set_property(TARGET opencv_ocl APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(opencv_ocl PROPERTIES
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_ocl.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_ocl.so.2.4"
+  )
+
+# Import target "opencv_nonfree" for configuration "RELEASE"
+set_property(TARGET opencv_nonfree APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(opencv_nonfree PROPERTIES
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_nonfree.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_nonfree.so.2.4"
+  )
+
+# Import target "opencv_contrib" for configuration "RELEASE"
+set_property(TARGET opencv_contrib APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(opencv_contrib PROPERTIES
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_contrib.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_contrib.so.2.4"
+  )
+
+# Import target "opencv_stitching" for configuration "RELEASE"
 set_property(TARGET opencv_stitching APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(opencv_stitching PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_stitching.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_stitching.so.3.3"
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_stitching.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_stitching.so.2.4"
   )
 
-# Import target "opencv_superres" for configuration "Release"
+# Import target "opencv_superres" for configuration "RELEASE"
 set_property(TARGET opencv_superres APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(opencv_superres PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_superres.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_superres.so.3.3"
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_superres.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_superres.so.2.4"
   )
 
-# Import target "opencv_videostab" for configuration "Release"
+# Import target "opencv_ts" for configuration "RELEASE"
+set_property(TARGET opencv_ts APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(opencv_ts PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_ts.a"
+  )
+
+# Import target "opencv_videostab" for configuration "RELEASE"
 set_property(TARGET opencv_videostab APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(opencv_videostab PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/3rdparty/opencv/_build/lib/libopencv_videostab.so.3.3.1"
-  IMPORTED_SONAME_RELEASE "libopencv_videostab.so.3.3"
+  IMPORTED_LOCATION_RELEASE "/home/kelly/Studio/kelly/alpesis-muse/cvmixer/_3rdparty/opencv/_build/lib/libopencv_videostab.so.2.4.13"
+  IMPORTED_SONAME_RELEASE "libopencv_videostab.so.2.4"
   )
 
 # This file does not depend on other imported targets which have
