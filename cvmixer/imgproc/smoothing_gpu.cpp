@@ -29,7 +29,8 @@ int main (int argc, char ** argv)
     std::cout << "CPU Blur: " << (cv::getTickCount() - tick_count) / cv::getTickFrequency() << std::endl;
 
     tick_count = cv::getTickCount();
-    cv::gpu::blur (img_gpu, img_gpu_blurred, cv::Size(7,7), cv::Point(-1, -1), stream);
+    //cv::gpu::blur (img_gpu, img_gpu_blurred, cv::Size(7,7), cv::Point(-1, -1), stream);
+    cv::gpu::GaussianBlur(img_gpu, img_gpu_blurred, cv::Size(7,7), 0);
     stream.waitForCompletion();
     std::cout << "GPU Blur: " << (cv::getTickCount() - tick_count) / cv::getTickFrequency() << std::endl;
   }
