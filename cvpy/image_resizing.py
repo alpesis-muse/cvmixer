@@ -1,6 +1,10 @@
+import time
+
 import cv2
+import pandas
 import imageio
 import itertools
+import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
@@ -10,6 +14,41 @@ METHODS = [("area", cv2.INTER_AREA),
            ("linear", cv2.INTER_LINEAR), 
            ("cubic", cv2.INTER_CUBIC), 
            ("lanczos4", cv2.INTER_LANCZOS4)]
+
+
+def performance(image):
+    data = []
+
+    n = 20
+    scale_factors = [0.05, 0.1, 0.3, 0.5, 0.9, 1.1, 1.5, 2, 4, 7, 12]
+
+    for m in METHODS:
+        for sf in scale_factors:
+            di = []
+            for i in range(n):
+                t0 = time.time()
+                cv2.resize(image, (0,0), fx=sf, fy=sf, interpolation=m[1])
+                dt = (time.time()-t0)
+                di.append(dt)
+            dt = np.mean(di)
+            err = 2*np.std(di)
+            data.append(dict(time=dt, method=m[0], err=err, scale=sf))
+
+    return pandas.DataFrame(data)
+
+
+def plot_performance(data):
+    g = data.groupby("method")
+    plt.figure(figsize=(10,6))
+    for n, gi in g:
+        plt.plot(gi["scale"], gi["time"], label=n)
+    plt.loglog()
+    plt.legend()
+    plt.xlabel("scale factor")
+    plt.ylabel("ave time (sec)")
+    plt.title("speed comparison")
+    plt.grid(which="both")
+    plt.show()
 
 
 def display(images, titles=['']):
@@ -55,3 +94,6 @@ if __name__ == '__main__':
     image_set = [[ima,]+imb for ima, imb in zip(images_orig, image_set)]
     image_set_names = ["original 400x400", ] + [m[0] + " 20x20" for m in METHODS]
     display(image_set, image_set_names)
+
+    times = performance(images_orig[0])
+    plot_performance(times)
