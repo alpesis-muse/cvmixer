@@ -83,17 +83,19 @@ if __name__ == '__main__':
 
     images = ["../images/Lenna.png"]
     images_orig = [imageio.imread(im) for im in images]
+    images_orig = [cv2.resize(im, (100, 100)) for im in images_orig]
     display(images_orig)
+    print images_orig[0].shape
 
     image_set = [[cv2.resize(im, (400, 400), interpolation=m[1]) for m in METHODS] for im in images_orig]
     image_set = [[ima,]+imb for ima, imb in zip(images_orig, image_set)]
-    image_set_names = ["original", ] + [m[0] + " 400x400" for m in METHODS]
+    image_set_names = ["original 100x100", ] + [m[0] + " 400x400" for m in METHODS]
     display(image_set, image_set_names)
 
-    image_set = [[cv2.resize(im, (20, 20), interpolation=m[1]) for m in METHODS] for im in images_orig]
+    image_set = [[cv2.resize(im, (40, 40), interpolation=m[1]) for m in METHODS] for im in images_orig]
     image_set = [[ima,]+imb for ima, imb in zip(images_orig, image_set)]
-    image_set_names = ["original 400x400", ] + [m[0] + " 20x20" for m in METHODS]
+    image_set_names = ["original 100x100", ] + [m[0] + " 40x40" for m in METHODS]
     display(image_set, image_set_names)
 
-    times = performance(images_orig[0])
-    plot_performance(times)
+    # times = performance(images_orig[0])
+    # plot_performance(times)
