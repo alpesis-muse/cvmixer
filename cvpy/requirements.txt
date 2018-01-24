@@ -1,0 +1,4 @@
+imageio==2.2.0
+opencv-python==3.4.0.12
+matplotlib==2.1.2
+
