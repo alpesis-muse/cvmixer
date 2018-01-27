@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <cv.h>
-#include <highgui.h>
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
  
 int main( int argc, char **argv ){
     IplImage *surfer, *milkyway, *result;
@@ -8,8 +8,8 @@ int main( int argc, char **argv ){
     CvSize size;
  
     /* load images, check, get size (both should have the same) */
-    surfer = cvLoadImage("surfer.jpg", CV_LOAD_IMAGE_COLOR);
-    milkyway = cvLoadImage("milkyway.jpg", CV_LOAD_IMAGE_COLOR);
+    surfer = cvLoadImage("./surfer.jpg", 1);
+    milkyway = cvLoadImage("./milkyway.jpg", 1);
     if((!surfer)||(!milkyway)){
         printf("Could not open one or more images.");
         exit -1;
