@@ -81,7 +81,7 @@ def display(images, titles=['']):
 
 if __name__ == '__main__':
 
-    images = ["../images/Lenna.png"]
+    images = ["../images/snow1.jpg"]
     images_orig = [imageio.imread(im) for im in images]
     images_orig = [cv2.resize(im, (100, 100)) for im in images_orig]
     display(images_orig)
@@ -97,5 +97,5 @@ if __name__ == '__main__':
     image_set_names = ["original 100x100", ] + [m[0] + " 40x40" for m in METHODS]
     display(image_set, image_set_names)
 
-    # times = performance(images_orig[0])
-    # plot_performance(times)
+    times = performance(images_orig[0])
+    plot_performance(times)
