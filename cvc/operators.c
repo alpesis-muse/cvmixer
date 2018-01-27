@@ -1,37 +1,50 @@
 #include <stdio.h>
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
+
+IplImage * load_image (char * filepath)
+{
+    if (!filepath)
+    {
+      printf("File not found at %s\n", filepath);
+      exit(-1);
+    }
+
+    IplImage * pic = cvLoadImage(filepath, 1);
+    return pic;
+}
+
+void add_images (IplImage * pic1, IplImage * pic2, IplImage * result)
+{
+  cvAdd(pic1, pic2, result, NULL);
+}
+
+void display_image(char * name, IplImage * image)
+{
+  cvNamedWindow(name, CV_WINDOW_AUTOSIZE);
+  cvShowImage(name, image);
+  cvWaitKey(0);
+
+  cvDestroyWindow(name);
+}
+
  
-int main( int argc, char **argv ){
-    IplImage *surfer, *milkyway, *result;
+int main(int argc, char *argv[])
+{
+    IplImage * pic1 = load_image(argv[1]);
+    IplImage * pic2 = load_image(argv[2]);
+    IplImage * result;
+
     int key = 0;
     CvSize size;
- 
-    /* load images, check, get size (both should have the same) */
-    surfer = cvLoadImage("./surfer.jpg", 1);
-    milkyway = cvLoadImage("./milkyway.jpg", 1);
-    if((!surfer)||(!milkyway)){
-        printf("Could not open one or more images.");
-        exit -1;
-    }
-    size = cvGetSize(surfer);
- 
-    /* create a empty image, same size, depth and channels of others */
-    result = cvCreateImage(size, surfer->depth, surfer->nChannels);
+    size = cvGetSize(pic1);
+    result = cvCreateImage(size, pic1->depth, pic1->nChannels);
     cvZero(result);
+    add_images(pic1, pic2, result); 
+    display_image("image_add", result);
  
-    /* result = surfer + milkyway (NULL mask)*/
-    cvAdd(surfer, milkyway, result, NULL);
- 
-    /* create a window, display the result, wait for a key */
-    cvNamedWindow("example", CV_WINDOW_AUTOSIZE);
-    cvShowImage("example", result);
-    cvWaitKey(0);
- 
-    /* free memory and get out */
-    cvDestroyWindow("example");
-    cvReleaseImage(&surfer);
-    cvReleaseImage(&milkyway);
+    cvReleaseImage(&pic1);
+    cvReleaseImage(&pic2);
     cvReleaseImage(&result);
     return 0;
 }

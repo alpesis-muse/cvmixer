@@ -49,9 +49,9 @@ IplImage * NormalizeImage(IplImage * image)
 }
 
 
-int main(void)
+int main(int argc, char * argv[])
 {
-  IplImage * image = cvLoadImage("./surfer.jpg", 1);
+  IplImage * image = cvLoadImage(argv[1], 1);
   IplImage * image_avg = NormalizeImage(image);
 
   cvNamedWindow("example", CV_WINDOW_AUTOSIZE);
