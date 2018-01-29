@@ -1,5 +1,5 @@
-#include <cv.h>
-#include <highgui.h>
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
 
 
 /*
@@ -49,9 +49,9 @@ IplImage * NormalizeImage(IplImage * image)
 }
 
 
-int main(void)
+int main(int argc, char * argv[])
 {
-  IplImage * image = cvLoadImage("./surfer.jpg", CV_LOAD_IMAGE_COLOR);
+  IplImage * image = cvLoadImage(argv[1], 1);
   IplImage * image_avg = NormalizeImage(image);
 
   cvNamedWindow("example", CV_WINDOW_AUTOSIZE);
